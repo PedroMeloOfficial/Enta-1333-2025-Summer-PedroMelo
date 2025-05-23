@@ -85,8 +85,29 @@ public class GridManager : MonoBehaviour
 
     public GridNode GetNode(int x, int y)
     {
+        // Ensure the grid is initialized
         if (!IsInitialized) InitializeGrid();
+
+        // Ensure the coordinates are within grid bounds
+        if (x < 0 || x >= gridSettings.GridSizeX || y < 0 || y >= gridSettings.GridSizeY)
+            throw new System.IndexOutOfRangeException("Grid node indices out of range");
+
+        // Return the node
         return gridNodes[x, y];
+    }
+
+    public GridNode GetNodeFromWorldPosition(Vector3 position)
+    {
+        // Determine the axes to be used based on the grid orientation
+        int x = gridSettings.UseXYPlane ? Mathf.RoundToInt(position.x / gridSettings.NodeSize) : Mathf.RoundToInt(position.x / gridSettings.NodeSize);
+        int y = gridSettings.UseXYPlane ? Mathf.RoundToInt(position.z / gridSettings.NodeSize) : Mathf.RoundToInt(position.y / gridSettings.NodeSize);
+
+        // Clamp the coordinates to the grid bounds
+        x = Mathf.Clamp(x, 0, gridSettings.GridSizeX - 1);
+        y = Mathf.Clamp(y, 0, gridSettings.GridSizeY - 1);
+
+        // Return the node of the clamped coordinates
+        return GetNode(x, y);
     }
 
 }
