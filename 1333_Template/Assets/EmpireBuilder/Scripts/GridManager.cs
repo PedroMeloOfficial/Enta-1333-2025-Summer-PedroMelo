@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GridManager : MonoBehaviour
 {
     [SerializeField] private GridSettings gridSettings;
@@ -10,13 +11,32 @@ public class GridManager : MonoBehaviour
     [Header("Terrain List")]
     [SerializeField] private List<TerrainType> terrainTypes = new();
 
+    private PathfindingManager pathfindingManager;
     private GridNode[,] gridNodes;
 
     [Header("Debug for editor playmode only")]
     [SerializeField] private List<GridNode> AllNode = new();
 
     public bool IsInitialized { get; private set; } = false;
-    public void InitiazeGrid()
+
+    private void Start()
+    {
+        pathfindingManager = GetComponent<PathfindingManager>();
+    }
+
+    private void Update()
+    {
+        // Regenerate grid and notify pathfinder when Space is pressed
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            InitializeGrid();
+            // Notify pathfinding manager to recalc
+            if (pathfindingManager != null)
+                pathfindingManager.GridUpdated();
+        }
+    }
+
+    public void InitializeGrid()
     {
         gridNodes = new GridNode[gridSettings.GridSizeX, gridSettings.GridSizeY];
 
@@ -24,7 +44,7 @@ public class GridManager : MonoBehaviour
         {
             for(int y = 0; y < gridSettings.GridSizeY; y++)
             {
-                Vector3 worldPos = gridSettings.UseXYPlane ? new Vector3(x, 0, y) * gridSettings.NoseSize : new Vector3(x, y, 0) * gridSettings.NoseSize;
+                Vector3 worldPos = gridSettings.UseXYPlane ? new Vector3(x, 0, y) * gridSettings.NodeSize : new Vector3(x, y, 0) * gridSettings.NodeSize;
 
                 TerrainType newTerrain = terrainTypes[Random.Range(0, terrainTypes.Count)];
 
@@ -58,9 +78,15 @@ public class GridManager : MonoBehaviour
             {
                 GridNode node = gridNodes[x, y];
                 Gizmos.color = node.Walkable ? node.TerrainColor : Color.red;
-                Gizmos.DrawWireCube(node.WorldPosition, Vector3.one * gridSettings.NoseSize * 0.9f);
+                Gizmos.DrawWireCube(node.WorldPosition, Vector3.one * gridSettings.NodeSize * 0.9f);
             }
         }
+    }
+
+    public GridNode GetNode(int x, int y)
+    {
+        if (!IsInitialized) InitializeGrid();
+        return gridNodes[x, y];
     }
 
 }

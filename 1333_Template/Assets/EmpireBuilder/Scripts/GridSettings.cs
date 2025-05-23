@@ -12,6 +12,6 @@ public class GridSettings : ScriptableObject
 
     public int GridSizeX => gridSizeX;
     public int GridSizeY => gridSizeY;
-    public float NoseSize => nodeSize;
+    public float NodeSize => nodeSize;
     public bool UseXYPlane => useXYPlane;
 }

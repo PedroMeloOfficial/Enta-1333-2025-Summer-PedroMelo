@@ -8,6 +8,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        gridManager.InitiazeGrid();
+        gridManager.InitializeGrid();
     }
 }
