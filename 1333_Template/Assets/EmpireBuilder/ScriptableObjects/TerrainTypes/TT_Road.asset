@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc220d992fae1254c9d3d98db1bfb104, type: 3}
+  m_Name: TT_Road
+  m_EditorClassIdentifier: 
+  terrainName: Road
+  gizmoColor: {r: 0.21333212, g: 0.86069024, b: 0.8867924, a: 1}
+  walkable: 1
+  movementCost: 1
