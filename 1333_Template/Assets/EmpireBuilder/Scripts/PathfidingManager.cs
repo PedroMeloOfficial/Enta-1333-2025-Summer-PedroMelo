@@ -48,8 +48,8 @@ public class PathfindingManager : MonoBehaviour
         if (!showPath || path == null || gridManager == null || !gridManager.IsInitialized)
             return;
 
-        Gizmos.color = Color.red;
-        float size = gridManager.GridSettings.NodeSize * 0.3f;
+        Gizmos.color = Color.magenta;
+        float size = gridManager.GridSettings.NodeSize * 0.25f;
 
         for (int i = 0; i < path.Count; i++)
         {
@@ -61,8 +61,7 @@ public class PathfindingManager : MonoBehaviour
             {
                 Vector2Int prev = path[i - 1];
                 GridNode prevNode = gridManager.GetNode(prev.x, prev.y);
-                Gizmos.DrawLine(prevNode.WorldPosition + Vector3.up * 0.1f,
-                                node.WorldPosition + Vector3.up * 0.1f);
+                Gizmos.DrawLine(prevNode.WorldPosition + Vector3.up * 0.1f, node.WorldPosition + Vector3.up * 0.1f);
             }
         }
     }
