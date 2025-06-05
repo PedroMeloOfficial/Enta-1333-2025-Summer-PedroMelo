@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4488043954158442820}
   - component: {fileID: 2589749693679026685}
+  - component: {fileID: 5294286974833019688}
   m_Layer: 0
   m_Name: GridManager
   m_TagString: Untagged
@@ -50,3 +51,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ef2aeed7574c9f543ae566033f373fd3, type: 2}
   - {fileID: 11400000, guid: 6b5286dff728d39469d2bc8fdf7d27dd, type: 2}
   AllNode: []
+--- !u!114 &5294286974833019688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3814557691807960040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b1caa1d9c6f3ee409f95b3f78398ffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startCoordinates: {x: 0, y: 0}
+  goalCoordinates: {x: 0, y: 0}
+  showPath: 1

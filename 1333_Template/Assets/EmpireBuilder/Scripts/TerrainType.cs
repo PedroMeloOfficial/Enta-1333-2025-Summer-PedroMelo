@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "TerrainType", menuName ="Game/TerrainType")]
+[CreateAssetMenu(fileName = "TerrainType", menuName ="Game/Terrain Type")]
 public class TerrainType : ScriptableObject
 {
     [SerializeField] private string terrainName = "Default";

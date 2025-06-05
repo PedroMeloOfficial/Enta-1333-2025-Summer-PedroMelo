@@ -46,7 +46,8 @@ public class GridManager : MonoBehaviour
             {
                 Vector3 worldPos = gridSettings.UseXYPlane ? new Vector3(x, 0, y) * gridSettings.NodeSize : new Vector3(x, y, 0) * gridSettings.NodeSize;
 
-                TerrainType newTerrain = terrainTypes[Random.Range(0, terrainTypes.Count)];
+                TerrainType newTerrain = getRandomTerrain(Random.Range(0,100));
+                // TerrainType newTerrain = terrainTypes[Random.Range(0, terrainTypes.Count)]; // Old code
 
                 GridNode node = new GridNode
                 {
@@ -108,6 +109,18 @@ public class GridManager : MonoBehaviour
 
         // Return the node of the clamped coordinates
         return GetNode(x, y);
+    }
+
+    private TerrainType getRandomTerrain(int index)
+    {
+        // Return terrainType "Rock"
+        if (index <= 15)
+        {
+            return terrainTypes[2];
+        }
+
+        // Return terrainType "Grass"
+        return terrainTypes[0];
     }
 
 }

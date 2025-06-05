@@ -39,6 +39,10 @@ public class PathfindingManager : MonoBehaviour
     {
         if (gridManager != null && gridManager.IsInitialized && showPath)
         {
+            startCoordinates.x = Random.Range(1,10);
+            startCoordinates.y = Random.Range(1, 10);
+            goalCoordinates.x = Random.Range(1, 10);
+            goalCoordinates.y = Random.Range(1, 10);
             path = pathfinder.FindPath(startCoordinates, goalCoordinates);
         }
     }

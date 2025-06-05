@@ -11,6 +11,15 @@ public class Pathfinder
         this.gridManager = gridManager;
     }
 
+    public List<GridNode> FindPath(Vector3 start, Vector3 end)
+    {
+        // Convert the start position to the closest grid node
+        GridNode startNode = gridManager.GetNodeFromWorldPosition(start);
+        // Convert the end position to the closest grid node
+        GridNode endNode = gridManager.GetNodeFromWorldPosition(end);
+        return FindPath(start, end);
+    }
+
     public List<Vector2Int> FindPath(Vector2Int start, Vector2Int goal)
     {
         List<Vector2Int> openSet = new List<Vector2Int>();
