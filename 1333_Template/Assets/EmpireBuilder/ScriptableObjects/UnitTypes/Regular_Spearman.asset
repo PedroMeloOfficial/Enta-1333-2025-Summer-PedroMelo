@@ -20,7 +20,7 @@ MonoBehaviour:
   defense: 2
   attackType: 0
   range: 2
-  prefab: {fileID: 7618858020749903222, guid: 5b70272498e70d24fac062ff8dd7348c, type: 3}
+  prefab: {fileID: 2610110169198077748, guid: 56a8bce06b277624ba81d9104f51ae61, type: 3}
   teamMaterials:
   - {fileID: 2100000, guid: cbca1dada9ca466478f987795a0600b0, type: 2}
   - {fileID: 2100000, guid: 94400f1c5892a3b42a4b63d7ab4d7332, type: 2}
