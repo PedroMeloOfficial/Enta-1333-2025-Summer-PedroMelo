@@ -7,6 +7,7 @@ public class GridManager : MonoBehaviour
 {
     [SerializeField] private GridSettings gridSettings;
     public GridSettings GridSettings => gridSettings;
+    public float NodeSize => gridSettings.NodeSize;
 
     [Header("Terrain List")]
     [SerializeField] private List<TerrainType> terrainTypes = new();

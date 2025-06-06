@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitInstance : UnitBase, ISelectable
+public class UnitInstance : UnitBase
 {
     [Header("Prefab Stuff")]
     [SerializeField] private Transform animationParent;
@@ -14,6 +14,7 @@ public class UnitInstance : UnitBase, ISelectable
     private Animator animator;
     private List<GridNode> currentPath = new();
     protected List<Vector2Int> currentPath2d = null;
+    private List<Vector2Int> nextPath2d = null;
     private int pathIndex = 0;
     private Vector3? targetWorldPosition = null;
     private bool isMoving = false;
@@ -158,11 +159,7 @@ public class UnitInstance : UnitBase, ISelectable
 
         float angleDifference = Vector3.Angle(transform.forward, direction);
 
-        transform.position = Vector3.MoveTowards(
-            transform.position,
-            nextWorldPos,
-            moveSpeed * Time.deltaTime
-        );
+        transform.position = Vector3.MoveTowards(transform.position, nextWorldPos, moveSpeed * Time.deltaTime);
 
         // Check if reached the waypoint
         if (Vector3.Distance(transform.position, nextWorldPos) < 0.01f)
@@ -207,20 +204,5 @@ public class UnitInstance : UnitBase, ISelectable
             animatoHandler.OnStateChanged(unitState);
     }
     */
-
-    public void OnSelect()
-    {
-        
-    }
-
-    public void OnDeselect()
-    {
-
-    }
-
-    public string GetLabel()
-    {
-        return unitType.name;
-    }
 
 }

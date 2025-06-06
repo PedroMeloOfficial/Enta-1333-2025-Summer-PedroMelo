@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class UnitBase : MonoBehaviour
+public abstract class UnitBase : MonoBehaviour, ISelectable
 {
     [SerializeField] protected UnitType unitType;
     public virtual int Width => unitType.Width;
