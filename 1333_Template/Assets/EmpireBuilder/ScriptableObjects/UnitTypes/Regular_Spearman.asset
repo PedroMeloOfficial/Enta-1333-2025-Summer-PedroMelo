@@ -21,3 +21,6 @@ MonoBehaviour:
   attackType: 0
   range: 2
   prefab: {fileID: 7618858020749903222, guid: 5b70272498e70d24fac062ff8dd7348c, type: 3}
+  teamMaterials:
+  - {fileID: 2100000, guid: cbca1dada9ca466478f987795a0600b0, type: 2}
+  - {fileID: 2100000, guid: 94400f1c5892a3b42a4b63d7ab4d7332, type: 2}

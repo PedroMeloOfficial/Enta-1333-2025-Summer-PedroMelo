@@ -16,6 +16,8 @@ public class UnitType : ScriptableObject
     [SerializeField] private AttackType attackType = AttackType.Melee;
     [SerializeField] private int range = 1;
     [SerializeField] private GameObject prefab;
+    [Header("Team Materials")]
+    [SerializeField] private Material[] teamMaterials = null;
 
     public int Width => width;
     public int Height => height;
@@ -25,4 +27,14 @@ public class UnitType : ScriptableObject
     public int Defense => defense;
 
     public GameObject Prefab => prefab;
+
+    public Material GetTeamMaterial(Team team)
+    {
+        int index = (int)team;
+        if (teamMaterials != null && index >= 0 && index < teamMaterials.Length)
+        {
+            return teamMaterials[index];
+        }
+        return null;
+    }
 }

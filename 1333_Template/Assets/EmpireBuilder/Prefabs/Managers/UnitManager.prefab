@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5511654087963323635
+--- !u!1 &1213638736081328667
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8708333665038983157}
-  - component: {fileID: 4918875643752641177}
+  - component: {fileID: 3575943132948985462}
+  - component: {fileID: 9052567087317051552}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: UnitManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8708333665038983157
+--- !u!4 &3575943132948985462
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5511654087963323635}
+  m_GameObject: {fileID: 1213638736081328667}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,19 +32,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4918875643752641177
+--- !u!114 &9052567087317051552
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5511654087963323635}
+  m_GameObject: {fileID: 1213638736081328667}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8702342ad5033ad42b9ced79028469e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 11f862afc9c028d49b1b9f1efdfb6e0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridManager: {fileID: 2589749693679026685, guid: 8114e83776cc63a4daba8e78352b5a5c, type: 3}
-  unitManager: {fileID: 9052567087317051552, guid: 8d9c0bf42cf300743a0699e0485b0118, type: 3}
-  playerInputManager: {fileID: 3150641472617782453, guid: d2b1641ee78778447a331503a73ea2fe, type: 3}
-  camera: {fileID: 0}
+  villager: {fileID: 11400000, guid: d93adb20d21d1724e92f6baef4e4e564, type: 2}
+  regularSword: {fileID: 11400000, guid: 353729cddc11af74ba752bd5f1ce16fc, type: 2}
+  regularSpear: {fileID: 11400000, guid: 5bd7e201aa6e7f34aa61e1658f44bb1f, type: 2}
+  heavySword: {fileID: 11400000, guid: a21aa42d3c868634495d52ffa7a44fb2, type: 2}

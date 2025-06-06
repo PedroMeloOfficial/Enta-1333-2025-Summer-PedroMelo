@@ -44,7 +44,7 @@ public class GridManager : MonoBehaviour
         {
             for(int y = 0; y < gridSettings.GridSizeY; y++)
             {
-                Vector3 worldPos = gridSettings.UseXYPlane ? new Vector3(x, 0, y) * gridSettings.NodeSize : new Vector3(x, y, 0) * gridSettings.NodeSize;
+                Vector3 worldPos = gridSettings.UseXZPlane ? new Vector3(x, 0, y) * gridSettings.NodeSize : new Vector3(x, y, 0) * gridSettings.NodeSize;
 
                 TerrainType newTerrain = getRandomTerrain(Random.Range(0,100));
                 // TerrainType newTerrain = terrainTypes[Random.Range(0, terrainTypes.Count)]; // Old code
@@ -89,9 +89,11 @@ public class GridManager : MonoBehaviour
         // Ensure the grid is initialized
         if (!IsInitialized) InitializeGrid();
 
+        /* MAYBE NOT WORKING
         // Ensure the coordinates are within grid bounds
         if (x < 0 || x >= gridSettings.GridSizeX || y < 0 || y >= gridSettings.GridSizeY)
             throw new System.IndexOutOfRangeException("Grid node indices out of range");
+        */
 
         // Return the node
         return gridNodes[x, y];
@@ -99,6 +101,7 @@ public class GridManager : MonoBehaviour
 
     public GridNode GetNodeFromWorldPosition(Vector3 position)
     {
+        /* NOT USING, CAUSE ERROR IN THE SELECTION BOX DRAWER
         // Determine the axes to be used based on the grid orientation
         int x = gridSettings.UseXYPlane ? Mathf.RoundToInt(position.x / gridSettings.NodeSize) : Mathf.RoundToInt(position.x / gridSettings.NodeSize);
         int y = gridSettings.UseXYPlane ? Mathf.RoundToInt(position.z / gridSettings.NodeSize) : Mathf.RoundToInt(position.y / gridSettings.NodeSize);
@@ -106,8 +109,15 @@ public class GridManager : MonoBehaviour
         // Clamp the coordinates to the grid bounds
         x = Mathf.Clamp(x, 0, gridSettings.GridSizeX - 1);
         y = Mathf.Clamp(y, 0, gridSettings.GridSizeY - 1);
+        */
 
-        // Return the node of the clamped coordinates
+        // Determine which axes to use based on grid orientation
+        int x = gridSettings.UseXZPlane ? Mathf.RoundToInt(position.x / gridSettings.NodeSize) : Mathf.RoundToInt(position.x / gridSettings.NodeSize);
+        int y = gridSettings.UseXZPlane ? Mathf.RoundToInt(position.z / gridSettings.NodeSize) : Mathf.RoundToInt(position.y / gridSettings.NodeSize);
+        // Clamp coordinates grid bounds
+        x = Mathf.Clamp(x, 0, gridSettings.GridSizeX - 1);
+        y = Mathf.Clamp(y, 0, gridSettings.GridSizeY - 1);
+        // Return the node of clamped coordinates
         return GetNode(x, y);
     }
 
@@ -121,6 +131,36 @@ public class GridManager : MonoBehaviour
 
         // Return terrainType "Grass"
         return terrainTypes[0];
+    }
+
+    public GridNode? GetRandomWalkableNode()
+    {
+        int gridWidth = gridSettings.GridSizeX;
+        int gridHeight = gridSettings.GridSizeY;
+
+        List<GridNode> walkableNodes = new List<GridNode>();
+
+        // Collect all walkable nodes
+        for (int x = 0; x < gridWidth; x++)
+        {
+            for (int y = 0; y < gridHeight; y++)
+            {
+                GridNode node = gridNodes[x, y];
+                if (node.Walkable)
+                {
+                    walkableNodes.Add(node);
+                }
+            }
+        }
+
+        if (walkableNodes.Count == 0)
+        {
+            return null; // no valid spawn node
+        }
+
+        // Pick one at random
+        int index = Random.Range(0, walkableNodes.Count);
+        return walkableNodes[index];
     }
 
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    private Camera cam;
+
     [Header("General Settings:")]
     public float cameraSpeed = 20.0f;
     public float scrollSpeed = 20.0f;
@@ -15,7 +17,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 pos = transform.position;
+        Vector3 pos = cam.transform.position;
 
         // Camera movements inputs
         if(Input.GetKey(KeyCode.W))
@@ -43,6 +45,12 @@ public class CameraController : MonoBehaviour
         pos.y = Mathf.Clamp(pos.y, minScroll, maxScroll);
 
         // Set position of this game object
-        transform.position = pos;
+        cam.transform.position = pos;
     }
+
+    public void Initialize(Camera _cam)
+    {
+        cam = _cam;
+    }
+
 }
