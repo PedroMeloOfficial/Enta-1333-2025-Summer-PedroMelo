@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GridManager gridManager;
     [SerializeField] private UnitManager unitManager;
+    [SerializeField] private BuildingPlacementManager buildingManger;
     [SerializeField] private MyPlayerInputManager playerInputManager;
     [SerializeField] private Camera cam;
 
@@ -21,5 +22,6 @@ public class GameManager : MonoBehaviour
         gridManager.InitializeGrid();
         unitManager.Initialize(gridManager, unitManager);
         playerInputManager.Initialize(cam, gridManager, unitManager);
+        buildingManger.Initialize(gridManager, unitManager);
     }
 }

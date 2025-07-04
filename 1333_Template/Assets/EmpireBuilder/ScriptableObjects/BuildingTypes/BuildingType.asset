@@ -13,13 +13,35 @@ MonoBehaviour:
   m_Name: BuildingType
   m_EditorClassIdentifier: 
   Buildings:
-  - Name: Castle
-    Icon: {fileID: 0}
   - Name: House
     Icon: {fileID: 0}
+    Description: 
+    BuildingPrefab: {fileID: 0}
+    BuildingModel: {fileID: 0}
+    Health: 0
+    SizeX: 0
+    SizeZ: 0
   - Name: Military Training Camp
     Icon: {fileID: 0}
+    Description: 
+    BuildingPrefab: {fileID: 7135968044326967754, guid: 15e7814b42af06e448ffa2d9790a9eab, type: 3}
+    BuildingModel: {fileID: 7135968044326967754, guid: 328c1b3cb2e7fa0458596a5cd007df37, type: 3}
+    Health: 0
+    SizeX: 6
+    SizeZ: 6
   - Name: Lumberjack Camp
     Icon: {fileID: 0}
+    Description: 
+    BuildingPrefab: {fileID: 0}
+    BuildingModel: {fileID: 0}
+    Health: 0
+    SizeX: 0
+    SizeZ: 0
   - Name: Miner Camp
     Icon: {fileID: 0}
+    Description: 
+    BuildingPrefab: {fileID: 0}
+    BuildingModel: {fileID: 0}
+    Health: 0
+    SizeX: 0
+    SizeZ: 0

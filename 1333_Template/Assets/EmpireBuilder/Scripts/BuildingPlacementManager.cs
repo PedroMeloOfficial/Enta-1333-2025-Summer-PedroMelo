@@ -21,11 +21,10 @@ public class BuildingPlacementManager : MonoBehaviour
     private UnitManager unitManager;
     private ResourceManager resourceManager;
 
-    public void Initialize(GridManager _gridManager, UnitManager _unitManager, ResourceManager _resourceManager)
+    public void Initialize(GridManager _gridManager, UnitManager _unitManager)
     {
         gridManager = _gridManager;
         unitManager = _unitManager;
-        resourceManager = _resourceManager;
 
         if (_gridManager == null)
             Debug.LogError("BuildingPlacementManager: GridManager not assigned");
