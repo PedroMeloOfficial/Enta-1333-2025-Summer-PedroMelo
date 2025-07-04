@@ -15,6 +15,9 @@ public class MyPlayerInputManager : MonoBehaviour
 
     private readonly List<UnitBase> selectedUnits = new();
 
+    // Track any ISelectable
+    private readonly List<ISelectable> selected = new List<ISelectable>();
+
     public void Initialize(Camera _cam, GridManager _gridManager, UnitManager _unitManager)
     {
         cam = _cam;
@@ -31,12 +34,6 @@ public class MyPlayerInputManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.X))
             UnitInstance.ShowPathGizmos = !UnitInstance.ShowPathGizmos;
-
-        // TESTING
-        if (Input.GetKeyDown(KeyCode.M) && selectionBoxDrawer.IsDragging)
-        {
-            TestMoveUnit();
-        }
 
         HandleMouseInput();
     }
@@ -103,25 +100,37 @@ public class MyPlayerInputManager : MonoBehaviour
 
     private void CommandSelectedUnits()
     {
-        if (cam == null || gridManager == null) return;
-
         Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
-        Plane ground = new(Vector3.up, Vector3.zero);
+        Plane ground = new Plane(Vector3.up, Vector3.zero);
+        if (!ground.Raycast(ray, out var enter)) return;
 
-        if (ground.Raycast(ray, out float enter))
+        Vector3 hitPoint = ray.GetPoint(enter);
+        GridNode targetNode = gridManager.GetNodeFromWorldPosition(hitPoint);
+        if (!targetNode.Walkable) return;
+
+        // Gather selected units
+        var units = new List<UnitInstance>();
+        foreach (var sel in selected)
+            if (sel is UnitInstance unit)
+                units.Add(unit);
+
+        // 1) Free all start cells so no unit blocks pathfinding
+        foreach (var u in units)
         {
-            Vector3 hitPoint = ray.GetPoint(enter);
-            GridNode node = gridManager.GetNodeFromWorldPosition(hitPoint);
-            if (!node.Walkable)
-            {
-                Debug.Log("SelectionManager: Target node is not walkable.");
-                return;
-            }
+            GridNode startNode = gridManager.GetNodeFromWorldPosition(u.transform.position);
+            startNode.Walkable = true;
+        }
 
-            foreach (UnitInstance unit in selectedUnits)
-            {
-                unit.MoveTo(node);
-            }
+        // 2) Find nearest free nodes around the target for each unit
+        var assignedNodes = gridManager.FindNearestFreeNodes(targetNode, units.Count);
+
+        // 3) Issue movement commands
+        for (int i = 0; i < units.Count; i++)
+        {
+            UnitInstance u = units[i];
+            var destNode = assignedNodes[i];
+            u.SetReservedDestination(destNode);
+            u.MoveTo(destNode);
         }
     }
 
@@ -143,13 +152,6 @@ public class MyPlayerInputManager : MonoBehaviour
         }
 
         selectedUnits.Clear();
-    }
-
-    private void TestMoveUnit()
-    {
-        GridNode? randomNode = gridManager.GetRandomWalkableNode();
-        foreach (UnitInstance unit in selectedUnits)
-            unit.MoveTo(randomNode.Value);
     }
 
 }

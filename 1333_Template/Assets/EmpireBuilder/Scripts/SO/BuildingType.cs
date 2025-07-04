@@ -11,6 +11,17 @@ public class BuildingType : ScriptableObject
 [System.Serializable]
 public class BuildingData
 {
+    [Header("General Info")]
     public string Name;
     public Sprite Icon;
+    public string Description;
+
+    [Header("Stats")]
+    public GameObject BuildingPrefab;
+    public GameObject BuildingModel;  
+    public int Health;
+
+    [Header("Grid Size")]
+    public int SizeX;
+    public int SizeZ;
 }

@@ -28,6 +28,10 @@ public class UnitInstance : UnitBase
     public bool IsMoving => isMoving;
     public Team UnitTeam => unitTeam;
     public List<GridNode> CurrentPath => currentPath;
+    public bool IsSelected { get; private set; }
+
+    // Protoced properties
+    protected GridNode _reservedDestNode = null;
 
     // Catched references
     protected GridManager gridManager;
@@ -195,6 +199,12 @@ public class UnitInstance : UnitBase
         currentPath = pathfinder.FindPath(transform.position, worldPosition);
         pathIndex = 0;
         isMoving = currentPath != null && currentPath.Count > 1;
+    }
+
+    // Stores the node reserved as this unit’s destination
+    public void SetReservedDestination(GridNode node)
+    {
+        _reservedDestNode = node;
     }
 
     /* NOT WORKING

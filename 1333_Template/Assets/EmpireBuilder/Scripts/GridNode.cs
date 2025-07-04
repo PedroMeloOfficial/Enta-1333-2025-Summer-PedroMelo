@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct GridNode
+public class GridNode
 {
     public string Name; // Grid Index
     public Vector3 WorldPosition;

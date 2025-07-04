@@ -209,3 +209,4 @@ MonoBehaviour:
   LayoutGroupParent: {fileID: 1216071602469183798}
   ButtonPrefab: {fileID: 5585058725414590614, guid: 8642adce781ee6645bd6d7159bce13ae, type: 3}
   BuildingData: {fileID: 11400000, guid: 1c078083b28c6b741a44493a26399b5c, type: 2}
+  PlacementManager: {fileID: 4614826278200245086, guid: b1d4d087f37b3a4428d2abed02969756, type: 3}

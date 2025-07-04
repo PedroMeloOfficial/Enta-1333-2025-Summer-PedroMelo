@@ -100,6 +100,7 @@ public class UnitManager : MonoBehaviour
             return;
         }
 
+        /*
         // Choose a random spawn position on a walkable node
         GridNode? rndWalkableNode = gridManager.GetRandomWalkableNode();
         if (!rndWalkableNode.HasValue)
@@ -110,9 +111,11 @@ public class UnitManager : MonoBehaviour
 
         GridNode rndNode = rndWalkableNode.Value;
         Vector3 spawnPosition = rndNode.WorldPosition;
+        */
 
+        /*
         // Instantiate the unit prefab at that position
-        GameObject unitGO = Instantiate(prefab, spawnPosition, Quaternion.identity);
+        GameObject unitGO = Instantiate(prefab, spawnPosition, Quaternion.identity); // SOLVE
 
         // 3) Get the UnitBase component and register it
         UnitInstance unitComponent = unitGO.GetComponent<UnitInstance>();
@@ -129,6 +132,7 @@ public class UnitManager : MonoBehaviour
             Debug.LogWarning($"ArmyManager: Spawned object {unitGO.name} does not have a UnitBase-derived component.");
             Destroy(unitGO);
         }
+        */
     }
     
 }

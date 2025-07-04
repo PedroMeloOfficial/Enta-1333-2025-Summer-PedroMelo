@@ -20,6 +20,8 @@ public class GridManager : MonoBehaviour
 
     public bool IsInitialized { get; private set; } = false;
 
+    private HashSet<GridNode> _reservedNodes = new HashSet<GridNode>();
+
     private void Start()
     {
         pathfindingManager = GetComponent<PathfindingManager>();
@@ -67,6 +69,11 @@ public class GridManager : MonoBehaviour
     public void SetWalkable(int x, int y, bool walkable)
     {
         gridNodes[x, y].Walkable = walkable;
+    }
+
+    public bool IsNodeReserved(GridNode node)
+    {
+        return _reservedNodes.Contains(node);
     }
 
     private void OnDrawGizmos()
@@ -162,6 +169,62 @@ public class GridManager : MonoBehaviour
         // Pick one at random
         int index = Random.Range(0, walkableNodes.Count);
         return walkableNodes[index];
+    }
+
+    public List<GridNode> FindNearestFreeNodes(GridNode center, int count)
+    {
+        List<GridNode> result = new List<GridNode>();
+        HashSet<GridNode> checkedNodes = new HashSet<GridNode>();
+        Queue<GridNode> queue = new Queue<GridNode>();
+
+        // Begin BFS from the center node
+        queue.Enqueue(center);
+        checkedNodes.Add(center);
+
+        // Continue until queue is empty or desired count is reached
+        while (queue.Count > 0 && result.Count < count)
+        {
+            GridNode node = queue.Dequeue();
+
+            // If this node is walkable and not reserved, add to results
+            if (node.Walkable && !IsNodeReserved(node))
+                result.Add(node);
+
+            // Enqueue each neighbor that has not yet been checked
+            foreach (GridNode neighbor in GetNeighbors(node))
+            {
+                if (!checkedNodes.Contains(neighbor))
+                {
+                    checkedNodes.Add(neighbor);
+                    queue.Enqueue(neighbor);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public IEnumerable<GridNode> GetNeighbors(GridNode node)
+    {
+        // Convert world position to grid indices
+        int x = Mathf.RoundToInt(node.WorldPosition.x / gridSettings.NodeSize);
+        int y = Mathf.RoundToInt(node.WorldPosition.z / gridSettings.NodeSize);
+
+        // Yield the node above if within bounds
+        if (y + 1 < gridSettings.GridSizeY)
+            yield return GetNode(x, y + 1);
+
+        // Yield the node below if within bounds
+        if (y - 1 >= 0)
+            yield return GetNode(x, y - 1);
+
+        // Yield the node to the right if within bounds
+        if (x + 1 < gridSettings.GridSizeX)
+            yield return GetNode(x + 1, y);
+
+        // Yield the node to the left if within bounds
+        if (x - 1 >= 0)
+            yield return GetNode(x - 1, y);
     }
 
 }
