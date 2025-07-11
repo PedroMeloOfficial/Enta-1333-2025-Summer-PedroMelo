@@ -132,7 +132,7 @@ public class GridManager : MonoBehaviour
     private TerrainType getRandomTerrain(int index)
     {
         // Return terrainType "Rock"
-        if (index <= 15)
+        if (index <= 5)
         {
             return terrainTypes[2];
         }
