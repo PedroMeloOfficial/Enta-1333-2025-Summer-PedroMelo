@@ -110,7 +110,7 @@ public class MyPlayerInputManager : MonoBehaviour
 
         // Gather selected units
         var units = new List<UnitInstance>();
-        foreach (var sel in selected)
+        foreach (var sel in selectedUnits)
             if (sel is UnitInstance unit)
                 units.Add(unit);
 

@@ -51,6 +51,19 @@ public class UnitManager : MonoBehaviour
         }
 
         pathfinder = new Pathfinder(gridManager);
+
+        // TESTING UNITS SPAWNING
+        if (regularSword != null)
+        {
+            SpawnArmy(regularSword, Team.Player);
+            SpawnArmy(regularSword, Team.Player);
+            SpawnArmy(regularSword, Team.Player);
+            SpawnArmy(regularSword, Team.Player);
+            SpawnArmy(regularSword, Team.Player);
+
+            SpawnArmy(regularSword, Team.Red);
+            SpawnArmy(regularSword, Team.Red);
+        }
     }
 
     
@@ -100,20 +113,20 @@ public class UnitManager : MonoBehaviour
             return;
         }
 
-        /*
+        
         // Choose a random spawn position on a walkable node
-        GridNode? rndWalkableNode = gridManager.GetRandomWalkableNode();
-        if (!rndWalkableNode.HasValue)
+        GridNode rndWalkableNode = gridManager.GetRandomWalkableNode();
+        if (rndWalkableNode == null)
         {
             Debug.LogWarning("ArmyManager: No walkable nodes available to spawn units.");
             return;
         }
 
-        GridNode rndNode = rndWalkableNode.Value;
+        GridNode rndNode = rndWalkableNode;
         Vector3 spawnPosition = rndNode.WorldPosition;
-        */
+        
 
-        /*
+        
         // Instantiate the unit prefab at that position
         GameObject unitGO = Instantiate(prefab, spawnPosition, Quaternion.identity); // SOLVE
 
@@ -132,7 +145,7 @@ public class UnitManager : MonoBehaviour
             Debug.LogWarning($"ArmyManager: Spawned object {unitGO.name} does not have a UnitBase-derived component.");
             Destroy(unitGO);
         }
-        */
+        
     }
     
 }
