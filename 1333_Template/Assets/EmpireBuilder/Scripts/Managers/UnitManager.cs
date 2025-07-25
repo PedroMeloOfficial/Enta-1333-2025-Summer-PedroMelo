@@ -65,7 +65,6 @@ public class UnitManager : MonoBehaviour
             SpawnArmy(regularSword, Team.Red);
         }
     }
-
     
     private void Update()
     {
