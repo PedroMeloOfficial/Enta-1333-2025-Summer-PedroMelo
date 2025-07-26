@@ -6,11 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/EmpireBuilder/Scenes/MainMenuScene.unity
-    guid: f5dc58b6c5913484a9be1ecc3677d753
-  - enabled: 1
-    path: Assets/EmpireBuilder/Scenes/TestScene.unity
-    guid: 4489af727324a8c49b9d7b88c9db7410
+    path: Assets/1333_RTS/StudentWork/Scenes/GamePlayScene.unity
+    guid: d68ed2c189d764744a099e46e0ea5441
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
