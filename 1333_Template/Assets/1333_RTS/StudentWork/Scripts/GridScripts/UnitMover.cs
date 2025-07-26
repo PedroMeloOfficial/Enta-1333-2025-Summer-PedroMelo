@@ -49,7 +49,7 @@ public class UnitMover : MonoBehaviour
             Vector3 nextXZ = currentPath[pathIndex].WorldPosition;
             nextXZ.y = transform.position.y;                // preserve current Y
 
-            // ★ Rotate – face next waypoint (Y-axis only)
+            // Rotate – face next waypoint (Y-axis only)
             Vector3 lookDir = nextXZ - transform.position;
             lookDir.y = 0f;                                 // lock to ground plane
             if (lookDir.sqrMagnitude > 0.001f)

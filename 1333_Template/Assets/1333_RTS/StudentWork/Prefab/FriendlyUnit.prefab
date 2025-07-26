@@ -781,6 +781,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GridManager: {fileID: 0}
   Pathfinding: {fileID: 0}
+  targetDistance: 10
 --- !u!114 &1553209891874357343
 MonoBehaviour:
   m_ObjectHideFlags: 0

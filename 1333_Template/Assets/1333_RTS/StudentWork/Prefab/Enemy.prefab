@@ -19750,7 +19750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b28180917a64fd4bbce1fbaf22d837c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 2
   repathInterval: 1
   turnSpeedDeg: 360
 --- !u!114 &1237094676240417707
@@ -19786,6 +19786,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GridManager: {fileID: 0}
   Pathfinding: {fileID: 0}
+  targetDistance: 20
+  findStyle: 1
 --- !u!114 &1072687731811634715
 MonoBehaviour:
   m_ObjectHideFlags: 0
