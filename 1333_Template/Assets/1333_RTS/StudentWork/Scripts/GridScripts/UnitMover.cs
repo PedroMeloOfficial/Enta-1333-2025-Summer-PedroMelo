@@ -1,5 +1,6 @@
 // Assets/Scripts/Units/UnitMover.cs
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 [RequireComponent(typeof(UnitAI))]
@@ -82,4 +83,14 @@ public class UnitMover : MonoBehaviour
         currentPath = pathfinding.FindPath(start, goal);
         pathIndex   = currentPath != null && currentPath.Count > 1 ? 1 : 0;
     }
+
+    public void MoveTo(GridNode node)
+    {
+        if (node == null) return;
+
+        currentPath = pathfinding.FindPath(grid.GetNodeFromWorldPosition(transform.position), node);
+        pathIndex = 0;
+    }
+
+
 }

@@ -2,21 +2,23 @@ using UnityEngine;
 
 public class MainGameController : MonoBehaviour
 {
-    [SerializeField] private GridManager manager;
+    [SerializeField] private GridManager gridManger;
+    [SerializeField] private SelectAndMoveUnit selectUnitManager;
 
     public Pathfinding NavGrid { get; private set; }
 
     private void Awake()
     {
         NavGrid = FindObjectOfType<Pathfinding>();
-        if (!manager.IsInitialized)
+        if (!gridManger.IsInitialized)
         {
-            manager.InitializeGrid();
+            gridManger.InitializeGrid();
         }
 
         if (NavGrid != null)
         {
-            NavGrid.Initialise(manager);
+            NavGrid.Initialise(gridManger);
+            selectUnitManager.Initialize(gridManger);
         }
     }
 }
