@@ -27,6 +27,7 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        musicSource.volume = 0.1f;
     }
 
     private void Start()
