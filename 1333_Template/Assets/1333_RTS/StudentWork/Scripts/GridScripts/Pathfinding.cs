@@ -51,11 +51,11 @@ public class Pathfinding : MonoBehaviour
     
     public List<GridNode> FindPath(GridNode start, GridNode goal)
     {
-        if (!start.Walkable || !goal.Walkable)
+        /*if (!start.Walkable || !goal.Walkable)
         {
             Debug.LogWarning("Start or goal is not walkable.");
             return new List<GridNode>();
-        }
+        }*/
 
         // Convert world positions to grid-space indices
         Vector3   startLocal = gridManager.transform.InverseTransformPoint(start.WorldPosition);

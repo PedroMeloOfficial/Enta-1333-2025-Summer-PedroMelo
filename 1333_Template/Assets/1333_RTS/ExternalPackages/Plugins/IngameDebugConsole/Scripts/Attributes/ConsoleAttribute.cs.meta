@@ -1,9 +1,2 @@
 fileFormatVersion: 2
-guid: efc4511f2eea8034ca3a0a29cac8f554
-AssetOrigin:
-  serializedVersion: 1
-  productId: 68068
-  packageName: In-game Debug Console
-  packageVersion: 1.8.0
-  assetPath: Assets/Plugins/IngameDebugConsole/Scripts/Attributes/ConsoleAttribute.cs
-  uploadId: 744541
+guid: 5076d1d8659dec643a749671388e4b97

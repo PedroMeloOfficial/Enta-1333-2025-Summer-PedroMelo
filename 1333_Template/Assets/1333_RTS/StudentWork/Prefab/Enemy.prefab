@@ -11506,7 +11506,7 @@ Transform:
   m_GameObject: {fileID: 3119328130080399129}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.088, z: 0}
+  m_LocalPosition: {x: 0, y: 0.017, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19750,7 +19750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b28180917a64fd4bbce1fbaf22d837c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 3
   repathInterval: 1
   turnSpeedDeg: 360
 --- !u!114 &1237094676240417707
@@ -19765,7 +19765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e1c61759cf314d4abdad43e095e255f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maximum: 60
+  maximum: 30
   numberPrefab: {fileID: 5555230864387013349, guid: 1236a5369f2e2a64792709b4e309da95, type: 3}
   barPrefab: {fileID: 675539464660379653, guid: 9a72fe66df5d2314bb36149d0997c1ec, type: 3}
   offsetPosition: {x: 0, y: 1.4, z: 0}
@@ -19786,8 +19786,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GridManager: {fileID: 0}
   Pathfinding: {fileID: 0}
-  targetDistance: 20
-  findStyle: 1
 --- !u!114 &1072687731811634715
 MonoBehaviour:
   m_ObjectHideFlags: 0

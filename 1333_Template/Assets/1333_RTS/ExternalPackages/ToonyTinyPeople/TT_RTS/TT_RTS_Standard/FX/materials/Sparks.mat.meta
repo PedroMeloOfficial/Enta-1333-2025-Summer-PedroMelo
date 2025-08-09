@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-guid: cba000a537231064badae10b954e7d9f
-timeCreated: 1542197604
-licenseType: Store
+guid: a328c2dec71a4ba4080841c23e35964f
 NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 135258
-  packageName: Toony Tiny RTS Set
-  packageVersion: 1.4
-  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/FX/materials/Sparks.mat
-  uploadId: 578651

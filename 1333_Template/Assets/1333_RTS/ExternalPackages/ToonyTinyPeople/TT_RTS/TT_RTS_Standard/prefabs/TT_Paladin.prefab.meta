@@ -1,15 +1,7 @@
 fileFormatVersion: 2
-guid: 675bfa49ad0f04c47b900d8546860383
-timeCreated: 1544658935
-licenseType: Store
-NativeFormatImporter:
+guid: 3c202b00344cce3419e86ce95d9bf8af
+PrefabImporter:
+  externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 135258
-  packageName: Toony Tiny RTS Set
-  packageVersion: 1.4
-  assetPath: Assets/ToonyTinyPeople/TT_RTS/TT_RTS_Standard/prefabs/TT_Paladin.prefab
-  uploadId: 578651

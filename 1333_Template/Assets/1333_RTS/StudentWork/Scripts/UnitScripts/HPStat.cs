@@ -32,6 +32,8 @@ public class HPStat : MonoBehaviour, IDamageReceiver
 
     public void TakeDamage(int amount, GameObject from)
     {
+        AudioManager.Instance?.PlaySFX(AudioManager.Instance.unitHitClip);
+        
         int temp = _current - amount;
         if (temp < 0)
             _current = 0;

@@ -141,7 +141,7 @@ MonoBehaviour:
   grid: {fileID: 0}
   rangeTiles: 8
   fireRate: 1
-  bulletDamage: 10
+  bulletDamage: 15
   barrel: {fileID: 0}
   interval: 0.3
 --- !u!1 &5079705049656955619

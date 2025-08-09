@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlacementHandler : MonoBehaviour
 {
@@ -8,19 +9,26 @@ public class PlacementHandler : MonoBehaviour
     [SerializeField] private GridManager grid;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float liftOffset = 0;
+    [SerializeField] private TextMeshProUGUI currencyText;
 
     [Header("Prefabs")]
-    [SerializeField] private GameObject[] prefabs;
+    [SerializeField] private GameObject[] prefabs; // 0: Friendly Unit, 1: Archer Tower
     [SerializeField] private Vector2Int[] sizes = {
-        new Vector2Int(2,2),
-        new Vector2Int(1,1),
-        new Vector2Int(1,1),
-        new Vector2Int(1,1)
+        new Vector2Int(1, 1), // Friendly Unit
+        new Vector2Int(1, 1)  // Archer Tower
     };
 
     [Header("Materials")]
     [SerializeField] private Material okMat;
     [SerializeField] private Material badMat;
+
+    [Header("Currency Settings")]
+    [SerializeField] private int startingCurrency = 0;
+    [SerializeField] private int incomePerSecond = 1;
+    [SerializeField] private int[] placementCosts = { 2, 20 }; // Friendly, ArcherTower
+
+    private int currency;
+    private float incomeTimer;
 
     GameObject ghost;
     int current = -1;
@@ -28,8 +36,15 @@ public class PlacementHandler : MonoBehaviour
     int originX, originY;
     Vector3 snapPos;
 
+    private void Start()
+    {
+        currency = startingCurrency;
+        UpdateCurrencyUI();
+    }
+
     private void Update()
     {
+        HandleCurrencyTick();
         Hotkeys();
         if (ghost == null) return;
         Snap();
@@ -37,18 +52,32 @@ public class PlacementHandler : MonoBehaviour
             Place();
     }
 
+    private void HandleCurrencyTick()
+    {
+        incomeTimer += Time.deltaTime;
+        if (incomeTimer >= 1f)
+        {
+            currency += incomePerSecond;
+            UpdateCurrencyUI();
+            incomeTimer = 0f;
+        }
+    }
+
     private void Hotkeys()
     {
-        if (Keyboard.current.digit1Key.wasPressedThisFrame) Set(0);
-        if (Keyboard.current.digit2Key.wasPressedThisFrame) Set(1);
-        if (Keyboard.current.digit3Key.wasPressedThisFrame) Set(2);
-        if (Keyboard.current.digit4Key.wasPressedThisFrame) Set(3);
+        if (Keyboard.current.digit1Key.wasPressedThisFrame) Set(0); // Friendly Unit
+        if (Keyboard.current.digit2Key.wasPressedThisFrame) Set(1); // Archer Tower
     }
 
     private void Set(int index)
     {
         if (index == current || index < 0 || index >= prefabs.Length) return;
+        if (currency < placementCosts[index]) return;
+
         current = index;
+        
+        AudioManager.Instance?.PlaySFX(AudioManager.Instance.buildingSelectClip);
+        
         if (ghost != null) Destroy(ghost);
         ghost = Instantiate(prefabs[index]);
         ghost.tag = "Untagged";
@@ -76,7 +105,7 @@ public class PlacementHandler : MonoBehaviour
 
         snapPos = grid.GetNodeAt(originX, originY).WorldPosition;
 
-        float lift = (current == 2 || current == 3) ? 0f : settings.NodeSize * 0.5f;
+        float lift = settings.NodeSize * 0.5f;
         ghost.transform.position = snapPos + Vector3.up * lift;
 
         valid = CheckRegion(originX, originY, sz.x, sz.y);
@@ -94,9 +123,9 @@ public class PlacementHandler : MonoBehaviour
 
     private void Place()
     {
-        bool building = (current == 2 || current == 3);
-        float lift = building ? grid.GridSettings.NodeSize * 0.5f : 0f;
+        if (currency < placementCosts[current]) return;
 
+        float lift = grid.GridSettings.NodeSize * 0.5f;
         GameObject obj = Instantiate(prefabs[current], snapPos + Vector3.up * lift, Quaternion.identity);
         obj.tag = prefabs[current].tag;
         obj.layer = prefabs[current].layer;
@@ -112,13 +141,24 @@ public class PlacementHandler : MonoBehaviour
         {
             GridNode node = grid.GetNodeAt(originX + dx, originY + dy);
             if (node == null) continue;
-            if (building) node.Walkable = false;
+            if (current == 1) node.Walkable = false; // Only Archer Tower blocks walkability
             node.Occupant = obj;
         }
+
+        currency -= placementCosts[current];
+        UpdateCurrencyUI();
+        
+        AudioManager.Instance?.PlaySFX(AudioManager.Instance.buildingPlaceClip);
 
         Destroy(ghost);
         ghost = null;
         current = -1;
+    }
+
+    private void UpdateCurrencyUI()
+    {
+        if (currencyText != null)
+            currencyText.text = currency.ToString();
     }
 
     private void SetMat(Material mat)

@@ -659,7 +659,7 @@ GameObject:
   - component: {fileID: 7973728945446078085}
   - component: {fileID: 1553209891874357343}
   - component: {fileID: 731988571922767618}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: FriendlyUnit
   m_TagString: Ally
   m_Icon: {fileID: 0}
@@ -714,13 +714,13 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 1
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.2500638, y: 1.6392251, z: 1}
@@ -781,7 +781,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GridManager: {fileID: 0}
   Pathfinding: {fileID: 0}
-  targetDistance: 10
 --- !u!114 &1553209891874357343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8601,7 +8600,7 @@ Transform:
   m_GameObject: {fileID: 8626168432971318890}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.031, z: 0}
+  m_LocalPosition: {x: 0, y: -0.082, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

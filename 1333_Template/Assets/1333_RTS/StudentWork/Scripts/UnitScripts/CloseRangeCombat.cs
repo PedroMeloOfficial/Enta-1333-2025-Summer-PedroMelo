@@ -29,6 +29,7 @@ public class CloseRangeCombat : MonoBehaviour
                 if (targetObj.TryGetComponent<IDamageReceiver>(out var hp))
                 {
                     hp.TakeDamage(damagePerHit, gameObject);
+                    AudioManager.Instance?.PlaySFX(AudioManager.Instance.unitAttackClip);
                 }
                 cooldown = 1f / hitsPerSecond;
             }

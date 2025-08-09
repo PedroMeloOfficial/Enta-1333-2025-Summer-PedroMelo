@@ -1,6 +1,5 @@
 // Assets/Scripts/Units/UnitMover.cs
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 [RequireComponent(typeof(UnitAI))]
@@ -49,7 +48,7 @@ public class UnitMover : MonoBehaviour
             Vector3 nextXZ = currentPath[pathIndex].WorldPosition;
             nextXZ.y = transform.position.y;                // preserve current Y
 
-            // Rotate – face next waypoint (Y-axis only)
+            // ★ Rotate – face next waypoint (Y-axis only)
             Vector3 lookDir = nextXZ - transform.position;
             lookDir.y = 0f;                                 // lock to ground plane
             if (lookDir.sqrMagnitude > 0.001f)
@@ -83,14 +82,4 @@ public class UnitMover : MonoBehaviour
         currentPath = pathfinding.FindPath(start, goal);
         pathIndex   = currentPath != null && currentPath.Count > 1 ? 1 : 0;
     }
-
-    public void MoveTo(GridNode node)
-    {
-        if (node == null) return;
-
-        currentPath = pathfinding.FindPath(grid.GetNodeFromWorldPosition(transform.position), node);
-        pathIndex = 0;
-    }
-
-
 }

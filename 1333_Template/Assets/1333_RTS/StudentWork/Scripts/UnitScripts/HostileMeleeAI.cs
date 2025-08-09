@@ -2,21 +2,14 @@ using UnityEngine;
 
 public class HostileMeleeAI : UnitAI
 {
-    [SerializeField] private float targetDistance;
-    [SerializeField] private EnemyFindStyle findStyle;
-
     public override GridNode GetDestination()
     {
-        GameObject target = FindClosestTarget("Ally");
-        CurrentTarget = target;
+        GameObject friendly = FindClosestTarget("Ally");
+        CurrentTarget = friendly;
 
-        // if (target == null) return null;
-        if (target == null)
-        {
-            return GridManager.GetNodeAt(Random.Range(0, GridManager.GridSettings.GridSizeX), Random.Range(0, GridManager.GridSettings.GridSizeY));
-        }
+        if (friendly == null) return null;
 
-        GridNode node = GridManager.GetNodeFromWorldPosition(target.transform.position);
+        GridNode node = GridManager.GetNodeFromWorldPosition(friendly.transform.position);
         if (node.Walkable) return node;
 
         GridNode self = GridManager.GetNodeFromWorldPosition(transform.position);
@@ -26,16 +19,7 @@ public class HostileMeleeAI : UnitAI
 
     private GameObject FindClosestTarget(string tag)
     {
-        float min;
-        if (findStyle == EnemyFindStyle.ByDistance)
-        {
-            min = targetDistance;
-        }
-        else 
-        {
-            min = float.MaxValue;
-        }
-
+        float min = float.MaxValue;
         GameObject nearest = null;
 
         foreach (var go in GameObject.FindGameObjectsWithTag(tag))
@@ -43,27 +27,11 @@ public class HostileMeleeAI : UnitAI
             float dist = Vector3.Distance(transform.position, go.transform.position);
             if (dist < min)
             {
-                if (go.GetComponent("UnitMover")) 
-                {
-                    min = dist;
-                }
-                else if (go.GetComponent("ArcheryTower"))
-                {
-                    min = dist;
-                }
-                else
-                {
-                    min = dist;
-                }
+                min = dist;
                 nearest = go;
             }
         }
 
         return nearest;
-    }
-
-    enum EnemyFindStyle {
-        Anywhere,
-        ByDistance
     }
 }

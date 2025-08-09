@@ -85,6 +85,8 @@ public class ArcherTower : MonoBehaviour
             return;
         }
 
+        AudioManager.Instance?.PlaySFX(AudioManager.Instance.unitAttackClip);
+        
         currentTarget.TakeDamage(bulletDamage, gameObject);
         Debug.DrawLine(barrel ? barrel.position : transform.position + Vector3.up,
             currentTarget.transform.position + Vector3.up,

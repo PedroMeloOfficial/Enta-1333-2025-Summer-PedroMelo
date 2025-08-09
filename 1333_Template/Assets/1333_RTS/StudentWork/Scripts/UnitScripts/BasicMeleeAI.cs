@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class BasicMeleeAI : UnitAI
 {
-    [SerializeField] private float targetDistance;
-
     public override GridNode GetDestination()
     {
         GameObject enemy = FindClosestTarget("Enemy");
@@ -22,7 +20,7 @@ public class BasicMeleeAI : UnitAI
     private GameObject FindClosestTarget(string tag)
     {
         GameObject best = null;
-        float minDist = targetDistance;
+        float minDist = float.MaxValue;
 
         foreach (var obj in GameObject.FindGameObjectsWithTag(tag))
         {
